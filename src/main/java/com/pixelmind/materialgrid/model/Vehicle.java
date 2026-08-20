@@ -1,7 +1,13 @@
-package com.pixelmind.materialgrid.model;
+﻿package com.pixelmind.materialgrid.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "vehicle")
 public class Vehicle {
@@ -11,13 +17,18 @@ public class Vehicle {
     @Column(name = "idvehicle")
     private Integer idvehicle;
 
-    @Column(name = "vehicle_number", nullable = false)
+    @Column(name = "vehicle_number", nullable = false, unique = true, length = 20)
     private String vehicleNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "vehicle_type_idvehicle_type", nullable = false)
-    private VehicleType vehicleType;
+    @Column(name = "capacity_in_cube", nullable = false)
+    private Double capacityInCube;
 
-    @Column(name = "capacity", nullable = false)
-    private Integer capacity;
+    @Column(name = "status", nullable = false, length = 10)
+    private String status = "ACTIVE";
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 }
